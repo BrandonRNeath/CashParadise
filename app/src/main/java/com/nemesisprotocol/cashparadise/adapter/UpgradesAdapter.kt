@@ -1,13 +1,11 @@
 package com.nemesisprotocol.cashparadise.adapter
 
-import android.util.Log
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.nemesisprotocol.cashparadise.R
+import com.nemesisprotocol.cashparadise.ui.MainActivity
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.upgrade_row.view.*
-
 
 /**
  *
@@ -18,13 +16,12 @@ import kotlinx.android.synthetic.main.upgrade_row.view.*
 class UpgradesAdapter(
     private var currentUpgradeLevel: Int,
     private var currentUpgradeCost: Long,
-    private val upgradeItemDrawableId: Int
+    private val upgradeItemDrawableId: Int,
+    private val upgradeId: Int
 ) :
     Item<GroupieViewHolder>() {
-
     private var currentUpgradeLevelText = "Upgrade Level \n $currentUpgradeLevel"
     private var currentUpgradeCostText = "Cost: $currentUpgradeCost"
-
 
     /**
      *
@@ -54,20 +51,27 @@ class UpgradesAdapter(
             )
         )
 
+        // On click listener for buying upgrade
         viewHolder.itemView.upgrade_card.setOnClickListener {
-            currentUpgradeLevel++
-            Log.d("Test", currentUpgradeLevel.toString())
-
-            viewHolder.itemView.tv_current_upgrade_level.text =  currentUpgradeLevelText.replace(
-                currentUpgradeLevelText,
-                "Upgrade Level \n $currentUpgradeLevel",
-                true
-            )
+            if (MainActivity.cash >= currentUpgradeCost) {
+                currentUpgradeLevel++
+                viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText.replace(
+                    currentUpgradeLevelText,
+                    "Upgrade Level \n $currentUpgradeLevel",
+                    true
+                )
+                // Deduct user cash
+                MainActivity.cash -= currentUpgradeCost
+                currentUpgradeCost += (currentUpgradeCost * MainActivity.UPGRADE_COST_MODIFIER).toLong()
+                viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
+                    currentUpgradeCostText,
+                    "Cost: $currentUpgradeCost",
+                    true
+                )
+                MainActivity.cashIncrement++
+            }
         }
     }
-
-
-    // Make onclick to increase price
 
     /**
      *

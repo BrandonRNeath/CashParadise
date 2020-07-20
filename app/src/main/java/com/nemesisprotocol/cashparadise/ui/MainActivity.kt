@@ -16,10 +16,12 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "MainActivity"
-        private var cash: Long = 0
-        private var cashIncrement: Double = 1.0
-        private var cashLuckLevel: Int = 1
-        private var cashLuckIncreaseCost: Double = 100.0
+        var cash: Long = 0
+        var cashIncrement: Double = 1.0
+        var luckUpgradeCost: Long = 100
+        const val START_UPGRADE_LEVEL = 1
+        const val UPGRADE_COST_MODIFIER = 0.4
+        const val DELAY_ONE_SECOND: Long = 1000
     }
 
     private lateinit var upgradeAdapter: GroupAdapter<GroupieViewHolder>
@@ -32,18 +34,8 @@ class MainActivity : AppCompatActivity() {
     private val updateCash = object : Runnable {
         override fun run() {
             incrementCash()
-            cashHandler.postDelayed(this, 1000)
+            cashHandler.postDelayed(this, DELAY_ONE_SECOND)
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        cashHandler.removeCallbacks(updateCash)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        cashHandler.post(updateCash)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         cashHandler = Handler(Looper.getMainLooper())
         setupUI()
+        freshCashParadise()
     }
 
     /**
@@ -63,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             player_score_tv.text = cash.toString()
         }
 
+        // Setting adapter for recycler view for cash upgrades
         upgradeAdapter = GroupAdapter<GroupieViewHolder>().apply {
             spanCount = 2
         }
@@ -86,19 +80,6 @@ class MainActivity : AppCompatActivity() {
                 DividerItemDecoration.VERTICAL
             )
         )
-
-        upgradeAdapter.add(UpgradesAdapter(3,1000,R.drawable.luck))
-        upgradeAdapter.add(UpgradesAdapter(2,1000,R.drawable.luck))
-        upgradeAdapter.add(UpgradesAdapter(3,1000,R.drawable.luck))
-        upgradeAdapter.add(UpgradesAdapter(2,1000,R.drawable.luck))
-//        cash_click_increase_tv.setOnClickListener {
-//            if (cash >= cashLuckIncreaseCost) {
-//                cashLuckLevel *= 2
-//                cashIncrement++
-//                cash = (cash - cashLuckIncreaseCost).toLong()
-//                cashLuckIncreaseCost += cashLuckIncreaseCost * 0.4
-//            }
-//        }
     }
 
     /**
@@ -107,5 +88,27 @@ class MainActivity : AppCompatActivity() {
     private fun incrementCash() {
         cash = (cash + cashIncrement).toLong()
         player_score_tv.text = cash.toString()
+    }
+
+    /**
+     *  Setup fresh game
+     */
+    private fun freshCashParadise() {
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                START_UPGRADE_LEVEL, luckUpgradeCost,
+                R.drawable.luck, 1
+            )
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        cashHandler.removeCallbacks(updateCash)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cashHandler.post(updateCash)
     }
 }
