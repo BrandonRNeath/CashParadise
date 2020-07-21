@@ -2,7 +2,7 @@ package com.nemesisprotocol.cashparadise.adapter
 
 import androidx.core.content.ContextCompat
 import com.nemesisprotocol.cashparadise.R
-import com.nemesisprotocol.cashparadise.ui.MainActivity
+import com.nemesisprotocol.cashparadise.gamedata.GameVariables
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.upgrade_row.view.*
@@ -57,7 +57,7 @@ class UpgradesAdapter(
 
         // On click listener for buying upgrade
         viewHolder.itemView.upgrade_card.setOnClickListener {
-            if (MainActivity.cash >= currentUpgradeCost) {
+            if (GameVariables.cash >= currentUpgradeCost) {
                 upgradeSelectedItem(viewHolder)
             }
         }
@@ -76,8 +76,8 @@ class UpgradesAdapter(
             true
         )
         // Deduct user cash
-        MainActivity.cash -= currentUpgradeCost
-        currentUpgradeCost += (currentUpgradeCost * MainActivity.UPGRADE_COST_MODIFIER).toLong()
+        GameVariables.cash -= currentUpgradeCost
+        currentUpgradeCost += (currentUpgradeCost * GameVariables.UPGRADE_COST_MODIFIER).toLong()
         // Replacing current upgrade cost text view with new upgrade cost
         viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
             currentUpgradeCostText,
@@ -85,9 +85,9 @@ class UpgradesAdapter(
             true
         )
         // Upgrade cash benefits are given determined off what upgrade has been selected
-        when (MainActivity.upgradeHashMap[upgradeId]) {
+        when (GameVariables.GAME_UPGRADES[upgradeId]) {
             "Luck" -> {
-                MainActivity.cashClickIncrement++
+                GameVariables.cashClickIncrement++
             }
             "Money Trees" -> {
             }

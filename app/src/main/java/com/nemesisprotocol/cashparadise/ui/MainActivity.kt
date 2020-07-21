@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.adapter.UpgradesAdapter
+import com.nemesisprotocol.cashparadise.gamedata.GameVariables
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,14 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "MainActivity"
-        var cash: Long = 0
-        var cashOverTimeIncrement: Long = 1
-        var cashClickIncrement: Long = 1
-        var luckUpgradeCost: Long = 50
-        const val START_UPGRADE_LEVEL = 1
-        const val UPGRADE_COST_MODIFIER = 0.4
-        const val DELAY_ONE_SECOND: Long = 1000
-        val upgradeHashMap: HashMap<Int, String> = hashMapOf(1 to "Luck", 2 to "Money Trees")
     }
 
     private lateinit var upgradeAdapter: GroupAdapter<GroupieViewHolder>
@@ -36,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val updateCash = object : Runnable {
         override fun run() {
             incrementCash()
-            cashHandler.postDelayed(this, DELAY_ONE_SECOND)
+            cashHandler.postDelayed(this, GameVariables.DELAY_ONE_SECOND)
         }
     }
 
@@ -53,8 +46,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupUI() {
         cash_increase_iv.setOnClickListener {
-            cash = (cash + cashClickIncrement)
-            player_score_tv.text = cash.toString()
+            GameVariables.cash = (GameVariables.cash + GameVariables.cashClickIncrement)
+            player_score_tv.text = GameVariables.cash.toString()
         }
 
         // Setting adapter for recycler view for cash upgrades
@@ -87,8 +80,8 @@ class MainActivity : AppCompatActivity() {
      *  Overtime cash increment
      */
     private fun incrementCash() {
-        cash = (cash + cashOverTimeIncrement)
-        player_score_tv.text = cash.toString()
+        GameVariables.cash = (GameVariables.cash + GameVariables.cashOverTimeIncrement)
+        player_score_tv.text = GameVariables.cash.toString()
     }
 
     /**
@@ -97,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     private fun freshCashParadise() {
         upgradeAdapter.add(
             UpgradesAdapter(
-                START_UPGRADE_LEVEL, luckUpgradeCost,
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.luckUpgradeCost,
                 R.drawable.luck, 1
             )
         )
