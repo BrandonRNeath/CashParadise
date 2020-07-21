@@ -17,11 +17,13 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
         var cash: Long = 0
-        var cashIncrement: Double = 1.0
-        var luckUpgradeCost: Long = 100
+        var cashOverTimeIncrement: Long = 1
+        var cashClickIncrement: Long = 1
+        var luckUpgradeCost: Long = 50
         const val START_UPGRADE_LEVEL = 1
         const val UPGRADE_COST_MODIFIER = 0.4
         const val DELAY_ONE_SECOND: Long = 1000
+        val upgradeHashMap: HashMap<Int, String> = hashMapOf(1 to "Luck", 2 to "Money Trees")
     }
 
     private lateinit var upgradeAdapter: GroupAdapter<GroupieViewHolder>
@@ -50,9 +52,8 @@ class MainActivity : AppCompatActivity() {
      *  Sets UI functionality for activity
      */
     private fun setupUI() {
-
         cash_increase_iv.setOnClickListener {
-            cash = (cash + cashIncrement).toLong()
+            cash = (cash + cashClickIncrement)
             player_score_tv.text = cash.toString()
         }
 
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
      *  Overtime cash increment
      */
     private fun incrementCash() {
-        cash = (cash + cashIncrement).toLong()
+        cash = (cash + cashOverTimeIncrement)
         player_score_tv.text = cash.toString()
     }
 

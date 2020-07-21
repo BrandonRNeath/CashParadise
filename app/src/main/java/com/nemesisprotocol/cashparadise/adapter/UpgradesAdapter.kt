@@ -11,6 +11,10 @@ import kotlinx.android.synthetic.main.upgrade_row.view.*
  *
  * @property currentUpgradeLevel String is the current upgrade level the user is on
  * @property currentUpgradeCost Long is the current cost of the upgrade
+ * @property upgradeItemDrawableId Int the drawable id of the image for the upgrade
+ * @property upgradeId Int is id of the upgrade that has been selected by the user
+ * @property currentUpgradeLevelText String the text for text view displaying current upgrade level
+ * @property currentUpgradeCostText String for text view displaying current upgrade cost
  * @constructor
  */
 class UpgradesAdapter(
@@ -54,21 +58,38 @@ class UpgradesAdapter(
         // On click listener for buying upgrade
         viewHolder.itemView.upgrade_card.setOnClickListener {
             if (MainActivity.cash >= currentUpgradeCost) {
-                currentUpgradeLevel++
-                viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText.replace(
-                    currentUpgradeLevelText,
-                    "Upgrade Level \n $currentUpgradeLevel",
-                    true
-                )
-                // Deduct user cash
-                MainActivity.cash -= currentUpgradeCost
-                currentUpgradeCost += (currentUpgradeCost * MainActivity.UPGRADE_COST_MODIFIER).toLong()
-                viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
-                    currentUpgradeCostText,
-                    "Cost: $currentUpgradeCost",
-                    true
-                )
-                MainActivity.cashIncrement++
+                upgradeSelectedItem(viewHolder)
+            }
+        }
+    }
+
+    /**
+     *
+     * @param viewHolder GroupieViewHolder is the view holder for the upgrade item within the
+     *  recycler view
+     */
+    private fun upgradeSelectedItem(viewHolder: GroupieViewHolder) {
+        currentUpgradeLevel++
+        viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText.replace(
+            currentUpgradeLevelText,
+            "Upgrade Level \n $currentUpgradeLevel",
+            true
+        )
+        // Deduct user cash
+        MainActivity.cash -= currentUpgradeCost
+        currentUpgradeCost += (currentUpgradeCost * MainActivity.UPGRADE_COST_MODIFIER).toLong()
+        // Replacing current upgrade cost text view with new upgrade cost
+        viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
+            currentUpgradeCostText,
+            "Cost: $currentUpgradeCost",
+            true
+        )
+        // Upgrade cash benefits are given determined off what upgrade has been selected
+        when (MainActivity.upgradeHashMap[upgradeId]) {
+            "Luck" -> {
+                MainActivity.cashClickIncrement++
+            }
+            "Money Trees" -> {
             }
         }
     }
