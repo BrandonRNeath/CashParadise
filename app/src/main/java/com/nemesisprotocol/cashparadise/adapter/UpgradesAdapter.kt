@@ -90,6 +90,7 @@ class UpgradesAdapter(
                 GameVariables.cashClickIncrement++
             }
             "Money Trees" -> {
+                GameVariables.cashOverTimeIncrement++
             }
         }
     }

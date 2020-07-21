@@ -94,6 +94,12 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.luck, 1
             )
         )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.moneyTreesUpgradeCost,
+                R.drawable.money_tree, 2
+            )
+        )
     }
 
     override fun onPause() {
