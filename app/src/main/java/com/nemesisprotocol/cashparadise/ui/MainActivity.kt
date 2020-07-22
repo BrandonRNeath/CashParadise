@@ -19,8 +19,14 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
+    /**
+     * This is the group adapter for the recycler view containing the cash upgrades
+     */
     private lateinit var upgradeAdapter: GroupAdapter<GroupieViewHolder>
 
+    /**
+     * Handler for delaying runnable object every 1 second
+     */
     lateinit var cashHandler: Handler
 
     /**
@@ -51,14 +57,16 @@ class MainActivity : AppCompatActivity() {
             player_score_tv.text = GameVariables.cash.toString()
         }
 
-        // Setting adapter for recycler view for cash upgrades
+        /**
+         * Setting adapter for recycler view for cash upgrades
+         */
         upgradeAdapter = GroupAdapter<GroupieViewHolder>().apply {
             spanCount = 2
         }
 
-        /*
-         Adding layout manager for the view as a Grid layout manager. With the addition
-         of checking span size of the items within each row of the recycler view
+        /**
+         * Adding layout manager for the view as a Grid layout manager. With the addition
+         * of checking span size of the items within each row of the recycler view
          */
         upgrade_recyclerview.apply {
             layoutManager =
@@ -68,7 +76,10 @@ class MainActivity : AppCompatActivity() {
                     }
             adapter = upgradeAdapter
         }
-        // Adding a divider between each 2 upgrade items within the recycler view
+
+        /**
+         * Adding a divider between each 2 upgrade items within the recycler view
+         */
         upgrade_recyclerview.addItemDecoration(
             DividerItemDecoration(
                 this@MainActivity,
@@ -87,6 +98,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      *  Setup fresh game
+     *  Adds all the upgrades for the game into the adapter for recycler view displaying
+     *  upgrades
      */
     private fun freshCashParadise() {
         upgradeAdapter.add(
@@ -105,6 +118,12 @@ class MainActivity : AppCompatActivity() {
             UpgradesAdapter(
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.investmentsUpgradeCost,
                 R.drawable.investment, GameVariables.INVESTMENTS_UPGRADE_ID
+            )
+        )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.goldMineUpgradeCost,
+                R.drawable.goldmine, GameVariables.GOLD_MINE_UPGRADE_ID
             )
         )
     }

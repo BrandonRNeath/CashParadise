@@ -43,11 +43,15 @@ class UpgradesAdapter(
      */
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
-        // Setting value of text views within the view
+        /**
+         * Setting value of text views within the view
+         */
         viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText
         viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText
 
-        // Setting image view of the upgrade item within the recycler view
+        /**
+         * Setting image view of the upgrade item within the recycler view
+         */
         viewHolder.itemView.iv_upgrade.setImageDrawable(
             ContextCompat.getDrawable(
                 viewHolder.itemView.context,
@@ -55,7 +59,9 @@ class UpgradesAdapter(
             )
         )
 
-        // On click listener for buying upgrade
+        /**
+         * On click listener for buying upgrade
+         */
         viewHolder.itemView.upgrade_card.setOnClickListener {
             if (GameVariables.cash >= currentUpgradeCost) {
                 upgradeSelectedItem(viewHolder)
@@ -76,21 +82,32 @@ class UpgradesAdapter(
             "Upgrade Level \n $currentUpgradeLevel",
             true
         )
-        // Deduct user cash
+
+        /**
+         *  Deduct user cash
+          */
         GameVariables.cash -= currentUpgradeCost
         currentUpgradeCost += (currentUpgradeCost * GameVariables.UPGRADE_COST_MODIFIER).toLong()
-        // Replacing current upgrade cost text view with new upgrade cost
+
+        /**
+         *  Replacing current upgrade cost text view with new upgrade cost
+         */
         viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
             currentUpgradeCostText,
             "Cost: $currentUpgradeCost",
             true
         )
-        // Upgrade cash benefits are given determined off what upgrade has been selected
+
+        /**
+         * Upgrade cash benefits are given determined off what upgrade has been selected
+         */
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
             "Luck" -> GameVariables.cashClickIncrement++
             "Money Trees" -> GameVariables.cashOverTimeIncrement++
             "Investments" -> GameVariables.cashOverTimeIncrement += GameVariables
                 .INVESTMENTS_CASH_OVER_TIME_INCREMENT
+            "Gold Mine" -> GameVariables.cashOverTimeIncrement += GameVariables
+                .GOLD_MINE_CASH_OVER_TIME_INCREMENT
         }
     }
 
