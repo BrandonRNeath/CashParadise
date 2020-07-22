@@ -64,7 +64,8 @@ class UpgradesAdapter(
     }
 
     /**
-     *
+     * The benefits of the upgrade selected by the user is added and the upgrade level is
+     * increased
      * @param viewHolder GroupieViewHolder is the view holder for the upgrade item within the
      *  recycler view
      */
@@ -86,12 +87,10 @@ class UpgradesAdapter(
         )
         // Upgrade cash benefits are given determined off what upgrade has been selected
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
-            "Luck" -> {
-                GameVariables.cashClickIncrement++
-            }
-            "Money Trees" -> {
-                GameVariables.cashOverTimeIncrement++
-            }
+            "Luck" -> GameVariables.cashClickIncrement++
+            "Money Trees" -> GameVariables.cashOverTimeIncrement++
+            "Investments" -> GameVariables.cashOverTimeIncrement += GameVariables
+                .INVESTMENTS_CASH_OVER_TIME_INCREMENT
         }
     }
 

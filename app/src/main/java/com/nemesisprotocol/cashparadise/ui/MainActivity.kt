@@ -92,13 +92,19 @@ class MainActivity : AppCompatActivity() {
         upgradeAdapter.add(
             UpgradesAdapter(
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.luckUpgradeCost,
-                R.drawable.luck, 1
+                R.drawable.luck, GameVariables.LUCK_UPGRADE_ID
             )
         )
         upgradeAdapter.add(
             UpgradesAdapter(
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.moneyTreesUpgradeCost,
-                R.drawable.money_tree, 2
+                R.drawable.money_tree, GameVariables.MONEY_TREES_UPGRADE_ID
+            )
+        )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.investmentsUpgradeCost,
+                R.drawable.investment, GameVariables.INVESTMENTS_UPGRADE_ID
             )
         )
     }
