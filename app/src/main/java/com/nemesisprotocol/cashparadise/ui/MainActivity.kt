@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.adapter.UpgradesAdapter
@@ -18,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
     }
+
+    /**
+     * Players current cash amount
+     */
+    private var playersTotalCash = "Total Cash: ${GameVariables.cash}"
 
     /**
      * This is the group adapter for the recycler view containing the cash upgrades
@@ -54,7 +58,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupUI() {
         cash_increase_iv.setOnClickListener {
             GameVariables.cash = (GameVariables.cash + GameVariables.cashClickIncrement)
-            player_score_tv.text = GameVariables.cash.toString()
+            player_score_tv.text = playersTotalCash.replace(
+                playersTotalCash,
+                "Total Cash: ${GameVariables.cash}",
+                true
+            )
         }
 
         /**
@@ -76,16 +84,6 @@ class MainActivity : AppCompatActivity() {
                     }
             adapter = upgradeAdapter
         }
-
-        /**
-         * Adding a divider between each 2 upgrade items within the recycler view
-         */
-        upgrade_recyclerview.addItemDecoration(
-            DividerItemDecoration(
-                this@MainActivity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     /**
@@ -93,7 +91,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun incrementCash() {
         GameVariables.cash = (GameVariables.cash + GameVariables.cashOverTimeIncrement)
-        player_score_tv.text = GameVariables.cash.toString()
+        player_score_tv.text = playersTotalCash.replace(
+            playersTotalCash,
+            "Total Cash: ${GameVariables.cash}",
+            true
+        )
     }
 
     /**
@@ -104,30 +106,35 @@ class MainActivity : AppCompatActivity() {
     private fun freshCashParadise() {
         upgradeAdapter.add(
             UpgradesAdapter(
+                GameVariables.LUCK_UPGRADE_TITLE,
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.luckUpgradeCost,
                 R.drawable.luck, GameVariables.LUCK_UPGRADE_ID
             )
         )
         upgradeAdapter.add(
             UpgradesAdapter(
+                GameVariables.MONEY_TREES_UPGRADE_TITLE,
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.moneyTreesUpgradeCost,
                 R.drawable.money_tree, GameVariables.MONEY_TREES_UPGRADE_ID
             )
         )
         upgradeAdapter.add(
             UpgradesAdapter(
+                GameVariables.INVESTMENTS_UPGRADE_TITLE,
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.investmentsUpgradeCost,
                 R.drawable.investment, GameVariables.INVESTMENTS_UPGRADE_ID
             )
         )
         upgradeAdapter.add(
             UpgradesAdapter(
+                GameVariables.GOLD_MINE_UPGRADE_TITLE,
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.goldMineUpgradeCost,
                 R.drawable.goldmine, GameVariables.GOLD_MINE_UPGRADE_ID
             )
         )
         upgradeAdapter.add(
             UpgradesAdapter(
+                GameVariables.REAL_ESTATE_UPGRADE_TITLE,
                 GameVariables.START_UPGRADE_LEVEL, GameVariables.realEstateUpgradeCost,
                 R.drawable.real_estate, GameVariables.REAL_ESTATE_UPGRADE_ID
             )

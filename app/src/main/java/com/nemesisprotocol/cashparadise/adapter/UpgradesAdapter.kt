@@ -8,7 +8,7 @@ import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.upgrade_row.view.*
 
 /**
- *
+ * @property upgradeTitle String is the title of the upgrade
  * @property currentUpgradeLevel String is the current upgrade level the user is on
  * @property currentUpgradeCost Long is the current cost of the upgrade
  * @property upgradeItemDrawableId Int the drawable id of the image for the upgrade
@@ -18,13 +18,14 @@ import kotlinx.android.synthetic.main.upgrade_row.view.*
  * @constructor
  */
 class UpgradesAdapter(
+    private var upgradeTitle: String,
     private var currentUpgradeLevel: Int,
     private var currentUpgradeCost: Long,
     private val upgradeItemDrawableId: Int,
     private val upgradeId: Int
 ) :
     Item<GroupieViewHolder>() {
-    private var currentUpgradeLevelText = "Upgrade Level \n $currentUpgradeLevel"
+    private var currentUpgradeLevelText = "Upgrade Level $currentUpgradeLevel"
     private var currentUpgradeCostText = "Cost: $currentUpgradeCost"
 
     /**
@@ -46,6 +47,7 @@ class UpgradesAdapter(
         /**
          * Setting value of text views within the view
          */
+        viewHolder.itemView.tv_upgrade_title.text = upgradeTitle
         viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText
         viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText
 
@@ -79,7 +81,7 @@ class UpgradesAdapter(
         currentUpgradeLevel++
         viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText.replace(
             currentUpgradeLevelText,
-            "Upgrade Level \n $currentUpgradeLevel",
+            "Upgrade Level $currentUpgradeLevel",
             true
         )
 

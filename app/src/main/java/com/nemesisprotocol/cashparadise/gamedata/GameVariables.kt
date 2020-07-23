@@ -30,6 +30,31 @@ object GameVariables {
     private const val REAL_ESTATE_UPGRADE_START_COST: Int = 1000000
 
     /**
+     * Title of the Luck upgrade
+     */
+    const val LUCK_UPGRADE_TITLE: String = "Luck"
+
+    /**
+     * Title of the Money Trees upgrade
+     */
+    const val MONEY_TREES_UPGRADE_TITLE: String = "Money Trees"
+
+    /**
+     * Title of the Investments upgrade
+     */
+    const val INVESTMENTS_UPGRADE_TITLE: String = "Investments"
+
+    /**
+     * Title of the Gold Mine upgrade
+     */
+    const val GOLD_MINE_UPGRADE_TITLE: String = "Gold Mine"
+
+    /**
+     * Title of the Real Estate upgrade
+     */
+    const val REAL_ESTATE_UPGRADE_TITLE: String = "Real Estate"
+
+    /**
      * The value for the beginning level of all the upgrades for the game
      */
     const val START_UPGRADE_LEVEL: Int = 1
@@ -136,10 +161,10 @@ object GameVariables {
      */
     val GAME_UPGRADES: HashMap<Int, String> =
         hashMapOf(
-            LUCK_UPGRADE_ID to "Luck",
-            MONEY_TREES_UPGRADE_ID to "Money Trees",
-            INVESTMENTS_UPGRADE_ID to "Investments",
-            GOLD_MINE_UPGRADE_ID to "Gold Mine",
-            REAL_ESTATE_UPGRADE_ID to "Real Estate"
+            LUCK_UPGRADE_ID to LUCK_UPGRADE_TITLE,
+            MONEY_TREES_UPGRADE_ID to MONEY_TREES_UPGRADE_TITLE,
+            INVESTMENTS_UPGRADE_ID to INVESTMENTS_UPGRADE_TITLE,
+            GOLD_MINE_UPGRADE_ID to GOLD_MINE_UPGRADE_TITLE,
+            REAL_ESTATE_UPGRADE_ID to REAL_ESTATE_UPGRADE_TITLE
         )
 }
