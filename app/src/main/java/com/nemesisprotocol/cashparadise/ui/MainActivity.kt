@@ -126,6 +126,12 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.goldmine, GameVariables.GOLD_MINE_UPGRADE_ID
             )
         )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.realEstateUpgradeCost,
+                R.drawable.real_estate, GameVariables.REAL_ESTATE_UPGRADE_ID
+            )
+        )
     }
 
     override fun onPause() {

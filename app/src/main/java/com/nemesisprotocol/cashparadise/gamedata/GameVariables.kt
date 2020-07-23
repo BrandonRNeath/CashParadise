@@ -25,6 +25,11 @@ object GameVariables {
     private const val GOLD_MINE_UPGRADE_START_COST: Int = 10000
 
     /**
+     * The value for the cost of the Real Estate upgrade at the start of the game
+     */
+    private const val REAL_ESTATE_UPGRADE_START_COST: Int = 1000000
+
+    /**
      * The value for the beginning level of all the upgrades for the game
      */
     const val START_UPGRADE_LEVEL: Int = 1
@@ -60,6 +65,11 @@ object GameVariables {
     const val GOLD_MINE_UPGRADE_ID: Int = 4
 
     /**
+     * Upgrade ID for the Real Estate upgrade
+     */
+    const val REAL_ESTATE_UPGRADE_ID: Int = 5
+
+    /**
      * Value for how much the cash over time increments by when Investments upgrade is selected
      */
     const val INVESTMENTS_CASH_OVER_TIME_INCREMENT = 50
@@ -70,16 +80,16 @@ object GameVariables {
     const val GOLD_MINE_CASH_OVER_TIME_INCREMENT = 1500
 
     /**
+     *
+     */
+    const val REAL_ESTATE_CASH_OVER_TIME_INCREMENT = 25000
+
+    /**
      * Value that undergoes Modulo operation with selected upgrade level to check that the user
      * reached cash bonus of upgrading 10 times. This bonus resets each 10 levels e.g.
      * bonus given at upgrade level 10,20,30 and so forth
      */
     const val LEVEL_BONUS_REACHED = 10
-
-    /**
-     * The cash increase per click when the user has reached the bonus
-     */
-    const val LUCK_CLICK_INCREASE_BONUS = 20
 
     /**
      * Players game cash which begins at 0 at start of the game
@@ -117,6 +127,11 @@ object GameVariables {
     var goldMineUpgradeCost: Long = GOLD_MINE_UPGRADE_START_COST.toLong()
 
     /**
+     * The value for the cost of the Real Estate upgrade that starts at its given start cost
+     */
+    var realEstateUpgradeCost: Long = REAL_ESTATE_UPGRADE_START_COST.toLong()
+
+    /**
      * The Upgrades of the game mapped to their Upgrade IDs
      */
     val GAME_UPGRADES: HashMap<Int, String> =
@@ -124,6 +139,7 @@ object GameVariables {
             LUCK_UPGRADE_ID to "Luck",
             MONEY_TREES_UPGRADE_ID to "Money Trees",
             INVESTMENTS_UPGRADE_ID to "Investments",
-            GOLD_MINE_UPGRADE_ID to "Gold Mine"
+            GOLD_MINE_UPGRADE_ID to "Gold Mine",
+            REAL_ESTATE_UPGRADE_ID to "Real Estate"
         )
 }

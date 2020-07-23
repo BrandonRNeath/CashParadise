@@ -85,7 +85,7 @@ class UpgradesAdapter(
 
         /**
          *  Deduct user cash
-          */
+         */
         GameVariables.cash -= currentUpgradeCost
         currentUpgradeCost += (currentUpgradeCost * GameVariables.UPGRADE_COST_MODIFIER).toLong()
 
@@ -102,13 +102,49 @@ class UpgradesAdapter(
          * Upgrade cash benefits are given determined off what upgrade has been selected
          */
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
-            "Luck" -> GameVariables.cashClickIncrement++
-            "Money Trees" -> GameVariables.cashOverTimeIncrement++
-            "Investments" -> GameVariables.cashOverTimeIncrement += GameVariables
-                .INVESTMENTS_CASH_OVER_TIME_INCREMENT
-            "Gold Mine" -> GameVariables.cashOverTimeIncrement += GameVariables
-                .GOLD_MINE_CASH_OVER_TIME_INCREMENT
+            "Luck" -> {
+                if (bonusReached()) {
+                    GameVariables.cashClickIncrement *= 2
+                }
+                GameVariables.cashClickIncrement++
+            }
+            "Money Trees" -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashOverTimeIncrement++
+            }
+            "Investments" -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashOverTimeIncrement += GameVariables
+                    .INVESTMENTS_CASH_OVER_TIME_INCREMENT
+            }
+            "Gold Mine" -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashOverTimeIncrement += GameVariables
+                    .GOLD_MINE_CASH_OVER_TIME_INCREMENT
+            }
+            "Real Estate" -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashOverTimeIncrement += GameVariables
+                    .REAL_ESTATE_CASH_OVER_TIME_INCREMENT
+            }
         }
+    }
+
+    /**
+     * Checks if the player has reached the bonus level for the upgrade selected where bonus
+     * levels are levels that are a multiple of 10
+     * @return Boolean returns true if bonus level has been reached
+     */
+    private fun bonusReached(): Boolean {
+        return currentUpgradeLevel % GameVariables.LEVEL_BONUS_REACHED == 0
     }
 
     /**
