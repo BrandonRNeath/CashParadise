@@ -153,6 +153,13 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.real_estate, GameVariables.REAL_ESTATE_UPGRADE_ID
             )
         )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.CASH_TRIDENT_UPGRADE_TITLE,
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.cashTridentUpgradeCost,
+                R.drawable.cash_trident, GameVariables.CASH_TRIDENT_UPGRADE_ID
+            )
+        )
     }
 
     override fun onPause() {

@@ -29,6 +29,12 @@ object GameVariables {
      */
     private const val REAL_ESTATE_UPGRADE_START_COST: Int = 10000000
 
+
+    /**
+     * The value for the cost of the Cash Trident upgrade at the start of the game
+     */
+    private const val CASH_TRIDENT_UPGRADE_START_COST: Long = 1000000000
+
     /**
      * Title of the Luck upgrade
      */
@@ -55,6 +61,11 @@ object GameVariables {
     const val REAL_ESTATE_UPGRADE_TITLE: String = "Real Estate"
 
     /**
+     * Title of the Cash Trident upgrade
+     */
+    const val CASH_TRIDENT_UPGRADE_TITLE: String = "Cash Trident"
+
+    /**
      * The value for the beginning level of all the upgrades for the game
      */
     const val START_UPGRADE_LEVEL: Int = 1
@@ -70,7 +81,7 @@ object GameVariables {
     const val DELAY_ONE_SECOND: Long = 1000
 
     /**
-     * The value to check if player has cash over 1 million so numbers can be reformatted
+     * The value to check if player has cash over 1 million so numbers can be reform*atted
      * to suit 1.2M 2.5B type formats to improve readability
      */
     const val ONE_MILLION_CASH_VALUE: Int = 1000000
@@ -101,19 +112,29 @@ object GameVariables {
     const val REAL_ESTATE_UPGRADE_ID: Int = 5
 
     /**
+     * Upgrade ID for the Cash Trident upgrade
+     */
+    const val CASH_TRIDENT_UPGRADE_ID: Int = 6
+
+    /**
      * Value for how much the cash over time increments by when Investments upgrade is selected
      */
     const val INVESTMENTS_CASH_OVER_TIME_INCREMENT = 50
 
     /**
-     * Value for how much the cash over time increments by when Investments upgrade is selected
+     * Value for how much the cash over time increments by when Gold Mine upgrade is selected
      */
     const val GOLD_MINE_CASH_OVER_TIME_INCREMENT = 1500
 
     /**
-     *
+     * Value for how much the cash over time increments by when Real Estate upgrade is selected
      */
     const val REAL_ESTATE_CASH_OVER_TIME_INCREMENT = 25000
+
+    /**
+     * Value for how much the cash click increases by when Cash Trident upgrade is selected
+     */
+    const val CASH_TRIDENT_CASH_CLICK_INCREMENT = 500000
 
     /**
      * Value that undergoes Modulo operation with selected upgrade level to check that the user
@@ -163,6 +184,11 @@ object GameVariables {
     var realEstateUpgradeCost: Long = REAL_ESTATE_UPGRADE_START_COST.toLong()
 
     /**
+     * The value for the cost of the Cash Trident upgrade that starts at its given start cost
+     */
+    var cashTridentUpgradeCost: Long = CASH_TRIDENT_UPGRADE_START_COST
+
+    /**
      * The Upgrades of the game mapped to their Upgrade IDs
      */
     val GAME_UPGRADES: HashMap<Int, String> =
@@ -171,6 +197,7 @@ object GameVariables {
             MONEY_TREES_UPGRADE_ID to MONEY_TREES_UPGRADE_TITLE,
             INVESTMENTS_UPGRADE_ID to INVESTMENTS_UPGRADE_TITLE,
             GOLD_MINE_UPGRADE_ID to GOLD_MINE_UPGRADE_TITLE,
-            REAL_ESTATE_UPGRADE_ID to REAL_ESTATE_UPGRADE_TITLE
+            REAL_ESTATE_UPGRADE_ID to REAL_ESTATE_UPGRADE_TITLE,
+            CASH_TRIDENT_UPGRADE_ID to CASH_TRIDENT_UPGRADE_TITLE
         )
 }

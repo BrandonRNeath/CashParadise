@@ -6,9 +6,8 @@ import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.gamedata.GameVariables
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import humanize.ICUHumanize
-import kotlinx.android.synthetic.main.upgrade_row.view.*
 import humanize.ICUHumanize.compactDecimal
+import kotlinx.android.synthetic.main.upgrade_row.view.*
 
 /**
  * @property upgradeTitle String is the title of the upgrade
@@ -109,38 +108,45 @@ class UpgradesAdapter(
          * Upgrade cash benefits are given determined off what upgrade has been selected
          */
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
-            "Luck" -> {
+            GameVariables.LUCK_UPGRADE_TITLE -> {
                 if (bonusReached()) {
                     GameVariables.cashClickIncrement *= 2
                 }
                 GameVariables.cashClickIncrement++
             }
-            "Money Trees" -> {
+            GameVariables.MONEY_TREES_UPGRADE_TITLE -> {
                 if (bonusReached()) {
                     GameVariables.cashOverTimeIncrement *= 2
                 }
                 GameVariables.cashOverTimeIncrement++
             }
-            "Investments" -> {
+            GameVariables.INVESTMENTS_UPGRADE_TITLE -> {
                 if (bonusReached()) {
                     GameVariables.cashOverTimeIncrement *= 2
                 }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .INVESTMENTS_CASH_OVER_TIME_INCREMENT
             }
-            "Gold Mine" -> {
+            GameVariables.GOLD_MINE_UPGRADE_TITLE -> {
                 if (bonusReached()) {
                     GameVariables.cashOverTimeIncrement *= 2
                 }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .GOLD_MINE_CASH_OVER_TIME_INCREMENT
             }
-            "Real Estate" -> {
+            GameVariables.REAL_ESTATE_UPGRADE_TITLE -> {
                 if (bonusReached()) {
                     GameVariables.cashOverTimeIncrement *= 2
                 }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .REAL_ESTATE_CASH_OVER_TIME_INCREMENT
+            }
+            GameVariables.CASH_TRIDENT_UPGRADE_TITLE -> {
+                if (bonusReached()) {
+                    GameVariables.cashClickIncrement *= 2
+                }
+                GameVariables.cashClickIncrement += GameVariables
+                    .CASH_TRIDENT_CASH_CLICK_INCREMENT
             }
         }
     }
