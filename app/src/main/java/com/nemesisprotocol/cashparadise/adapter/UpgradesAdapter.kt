@@ -1,11 +1,14 @@
 package com.nemesisprotocol.cashparadise.adapter
 
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.gamedata.GameVariables
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import humanize.ICUHumanize
 import kotlinx.android.synthetic.main.upgrade_row.view.*
+import humanize.ICUHumanize.compactDecimal
 
 /**
  * @property upgradeTitle String is the title of the upgrade
@@ -69,7 +72,13 @@ class UpgradesAdapter(
                 upgradeSelectedItem(viewHolder)
             }
         }
+
+        /**
+         * Displaying cost of upgrade
+         */
+        checkUpgradeCostFormat(viewHolder)
     }
+
 
     /**
      * The benefits of the upgrade selected by the user is added and the upgrade level is
@@ -94,11 +103,7 @@ class UpgradesAdapter(
         /**
          *  Replacing current upgrade cost text view with new upgrade cost
          */
-        viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
-            currentUpgradeCostText,
-            "Cost: $currentUpgradeCost",
-            true
-        )
+        checkUpgradeCostFormat(viewHolder)
 
         /**
          * Upgrade cash benefits are given determined off what upgrade has been selected
@@ -147,6 +152,29 @@ class UpgradesAdapter(
      */
     private fun bonusReached(): Boolean {
         return currentUpgradeLevel % GameVariables.LEVEL_BONUS_REACHED == 0
+    }
+
+    /**
+     * Checks if cost of the upgrade has exceeded over one million and if so the format of the
+     * cost being displayed is changed to a format such as 1.2M, 2.6B and 1.5T where M,B and T
+     * represent Million,Billion and Trillion to improve the overall readability of the upgrade
+     * cost being displayed else default value of Long Cash value is displayed
+     * @param viewHolder GroupieViewHolder of the cash upgrade
+     */
+    private fun checkUpgradeCostFormat(viewHolder: GroupieViewHolder) {
+        if (currentUpgradeCost >= GameVariables.ONE_MILLION_CASH_VALUE) {
+            viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
+                currentUpgradeCostText,
+                "Cost: ${compactDecimal(currentUpgradeCost)}",
+                true
+            )
+        } else {
+            viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText.replace(
+                currentUpgradeCostText,
+                "Cost: $currentUpgradeCost",
+                true
+            )
+        }
     }
 
     /**

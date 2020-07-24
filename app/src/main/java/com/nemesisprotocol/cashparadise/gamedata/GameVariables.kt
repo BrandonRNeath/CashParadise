@@ -27,7 +27,7 @@ object GameVariables {
     /**
      * The value for the cost of the Real Estate upgrade at the start of the game
      */
-    private const val REAL_ESTATE_UPGRADE_START_COST: Int = 1000000
+    private const val REAL_ESTATE_UPGRADE_START_COST: Int = 10000000
 
     /**
      * Title of the Luck upgrade
@@ -68,6 +68,12 @@ object GameVariables {
      * The time in millis for the cash over time increment for the game which is every 1 second
      */
     const val DELAY_ONE_SECOND: Long = 1000
+
+    /**
+     * The value to check if player has cash over 1 million so numbers can be reformatted
+     * to suit 1.2M 2.5B type formats to improve readability
+     */
+    const val ONE_MILLION_CASH_VALUE: Int = 1000000
 
     /**
      * Upgrade ID for the Luck upgrade

@@ -12,6 +12,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 
+import humanize.ICUHumanize.compactDecimal
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -46,23 +48,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        cashHandler = Handler(Looper.getMainLooper())
-        supportActionBar?.hide()
         setupUI()
-        freshCashParadise()
     }
 
     /**
      *  Sets UI functionality for activity
      */
     private fun setupUI() {
+
+        cashHandler = Handler(Looper.getMainLooper())
+
+        /**
+         * Setup on click listener to increase cash each click of cash
+         */
         cash_increase_iv.setOnClickListener {
-            GameVariables.cash = (GameVariables.cash + GameVariables.cashClickIncrement)
-            player_score_tv.text = playersTotalCash.replace(
-                playersTotalCash,
-                "Total Cash: ${GameVariables.cash}",
-                true
-            )
+            incrementCash()
         }
 
         /**
@@ -83,7 +83,13 @@ class MainActivity : AppCompatActivity() {
                         spanSizeLookup = upgradeAdapter.spanSizeLookup
                     }
             adapter = upgradeAdapter
+
         }
+
+        /**
+         *  Begin Cash Paradise game
+         */
+        freshCashParadise()
     }
 
     /**
@@ -91,11 +97,19 @@ class MainActivity : AppCompatActivity() {
      */
     private fun incrementCash() {
         GameVariables.cash = (GameVariables.cash + GameVariables.cashOverTimeIncrement)
-        player_score_tv.text = playersTotalCash.replace(
-            playersTotalCash,
-            "Total Cash: ${GameVariables.cash}",
-            true
-        )
+        if (GameVariables.cash > GameVariables.ONE_MILLION_CASH_VALUE) {
+            player_score_tv.text = playersTotalCash.replace(
+                playersTotalCash,
+                "Total Cash: ${compactDecimal(GameVariables.cash)}",
+                true
+            )
+        } else {
+            player_score_tv.text = playersTotalCash.replace(
+                playersTotalCash,
+                "Total Cash: ${(GameVariables.cash)}",
+                true
+            )
+        }
     }
 
     /**
