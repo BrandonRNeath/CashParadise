@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
              * Animation each time the player clicks the cash
              */
             val cashClickAnimation: Animation =
-                AnimationUtils.loadAnimation(this, R.anim.cash_scale_animation)
+                AnimationUtils.loadAnimation(this, R.anim.scale_animation)
             cash_increase_iv.startAnimation(cashClickAnimation)
         }
 

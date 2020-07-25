@@ -1,5 +1,7 @@
 package com.nemesisprotocol.cashparadise.adapter
 
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.gamedata.GameVariables
@@ -68,6 +70,16 @@ class UpgradesAdapter(
         viewHolder.itemView.upgrade_card.setOnClickListener {
             if (GameVariables.cash >= currentUpgradeCost) {
                 upgradeSelectedItem(viewHolder)
+
+                /**
+                 * Animation occurs when upgrade has been bought
+                 */
+                val upgradeClickAnimation: Animation =
+                    AnimationUtils.loadAnimation(
+                        viewHolder.itemView.context,
+                        R.anim.scale_animation
+                    )
+                viewHolder.itemView.upgrade_card.animation = upgradeClickAnimation
             }
         }
 
