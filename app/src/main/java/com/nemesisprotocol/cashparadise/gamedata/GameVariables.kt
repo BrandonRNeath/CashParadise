@@ -36,6 +36,12 @@ object GameVariables {
     private const val CASH_TRIDENT_UPGRADE_START_COST: Long = 1000000000
 
     /**
+     * The value for the cost of the Lost Treasure upgrade at the start of the game
+     */
+    private const val LOST_TREASURE_UPGRADE_START_COST: Long = 100000000000
+
+
+    /**
      * Title of the Luck upgrade
      */
     const val LUCK_UPGRADE_TITLE: String = "Luck"
@@ -66,6 +72,11 @@ object GameVariables {
     const val CASH_TRIDENT_UPGRADE_TITLE: String = "Cash Trident"
 
     /**
+     * Title of the Lost Treasure upgrade
+     */
+    const val LOST_TREASURE_UPGRADE_TITLE: String = "Lost Treasure"
+
+    /**
      * The value for the beginning level of all the upgrades for the game
      */
     const val START_UPGRADE_LEVEL: Int = 1
@@ -81,7 +92,7 @@ object GameVariables {
     const val DELAY_ONE_SECOND: Long = 1000
 
     /**
-     * The value to check if player has cash over 1 million so numbers can be reform*atted
+     * The value to check if player has cash over 1 million so numbers can be reformatted
      * to suit 1.2M 2.5B type formats to improve readability
      */
     const val ONE_MILLION_CASH_VALUE: Int = 1000000
@@ -117,6 +128,11 @@ object GameVariables {
     const val CASH_TRIDENT_UPGRADE_ID: Int = 6
 
     /**
+     * Upgrade ID for the Lost Treasure upgrade
+     */
+    const val LOST_TREASURE_UPGRADE_ID: Int = 7
+
+    /**
      * Value for how much the cash over time increments by when Investments upgrade is selected
      */
     const val INVESTMENTS_CASH_OVER_TIME_INCREMENT = 50
@@ -135,6 +151,11 @@ object GameVariables {
      * Value for how much the cash click increases by when Cash Trident upgrade is selected
      */
     const val CASH_TRIDENT_CASH_CLICK_INCREMENT = 500000
+
+    /**
+     * Value for how much the cash over time increments by when Lost Treasure upgrade is selected
+     */
+    const val LOST_TREASURE_CASH_OVER_TIME_INCREMENT = 5000000
 
     /**
      * Value that undergoes Modulo operation with selected upgrade level to check that the user
@@ -189,6 +210,11 @@ object GameVariables {
     var cashTridentUpgradeCost: Long = CASH_TRIDENT_UPGRADE_START_COST
 
     /**
+     * The value for the cost of the Lost Treasure upgrade that starts at its given start cost
+     */
+    var lostTreasureUpgradeCost: Long = LOST_TREASURE_UPGRADE_START_COST
+
+    /**
      * The Upgrades of the game mapped to their Upgrade IDs
      */
     val GAME_UPGRADES: HashMap<Int, String> =
@@ -198,6 +224,7 @@ object GameVariables {
             INVESTMENTS_UPGRADE_ID to INVESTMENTS_UPGRADE_TITLE,
             GOLD_MINE_UPGRADE_ID to GOLD_MINE_UPGRADE_TITLE,
             REAL_ESTATE_UPGRADE_ID to REAL_ESTATE_UPGRADE_TITLE,
-            CASH_TRIDENT_UPGRADE_ID to CASH_TRIDENT_UPGRADE_TITLE
+            CASH_TRIDENT_UPGRADE_ID to CASH_TRIDENT_UPGRADE_TITLE,
+            LOST_TREASURE_UPGRADE_ID to LOST_TREASURE_UPGRADE_TITLE
         )
 }

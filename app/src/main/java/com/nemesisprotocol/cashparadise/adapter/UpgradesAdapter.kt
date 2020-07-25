@@ -1,6 +1,5 @@
 package com.nemesisprotocol.cashparadise.adapter
 
-import android.util.Log
 import androidx.core.content.ContextCompat
 import com.nemesisprotocol.cashparadise.R
 import com.nemesisprotocol.cashparadise.gamedata.GameVariables
@@ -147,6 +146,13 @@ class UpgradesAdapter(
                 }
                 GameVariables.cashClickIncrement += GameVariables
                     .CASH_TRIDENT_CASH_CLICK_INCREMENT
+            }
+            GameVariables.LOST_TREASURE_UPGRADE_TITLE -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashClickIncrement += GameVariables
+                    .LOST_TREASURE_CASH_OVER_TIME_INCREMENT
             }
         }
     }

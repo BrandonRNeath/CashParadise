@@ -160,6 +160,13 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.cash_trident, GameVariables.CASH_TRIDENT_UPGRADE_ID
             )
         )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.LOST_TREASURE_UPGRADE_TITLE,
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.lostTreasureUpgradeCost,
+                R.drawable.lost_treasure, GameVariables.LOST_TREASURE_UPGRADE_ID
+            )
+        )
     }
 
     override fun onPause() {
