@@ -3,6 +3,8 @@ package com.nemesisprotocol.cashparadise.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nemesisprotocol.cashparadise.R
@@ -62,6 +64,13 @@ class MainActivity : AppCompatActivity() {
          */
         cash_increase_iv.setOnClickListener {
             incrementCash(GameVariables.cashClickIncrement)
+
+            /**
+             * Animation each time the player clicks the cash
+             */
+            val cashClickAnimation: Animation =
+                AnimationUtils.loadAnimation(this, R.anim.cash_scale_animation)
+            cash_increase_iv.startAnimation(cashClickAnimation)
         }
 
         /**
