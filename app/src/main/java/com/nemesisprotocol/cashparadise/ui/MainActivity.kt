@@ -167,6 +167,13 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.lost_treasure, GameVariables.LOST_TREASURE_UPGRADE_ID
             )
         )
+        upgradeAdapter.add(
+            UpgradesAdapter(
+                GameVariables.MAGIC_PEARLS_UPGRADE_TITLE,
+                GameVariables.START_UPGRADE_LEVEL, GameVariables.magicPearlsUpgradeCost,
+                R.drawable.magic_pearls, GameVariables.MAGIC_PEARLS_UPGRADE_ID
+            )
+        )
     }
 
     override fun onPause() {

@@ -40,6 +40,10 @@ object GameVariables {
      */
     private const val LOST_TREASURE_UPGRADE_START_COST: Long = 100000000000
 
+    /**
+     * The value for the cost of the Magic Pearls upgrade at the start of the game
+     */
+    private const val MAGIC_PEARLS_UPGRADE_START_COST: Long = 10000000000000
 
     /**
      * Title of the Luck upgrade
@@ -75,6 +79,11 @@ object GameVariables {
      * Title of the Lost Treasure upgrade
      */
     const val LOST_TREASURE_UPGRADE_TITLE: String = "Lost Treasure"
+
+    /**
+     * Title of the Magic Pearls upgrade
+     */
+    const val MAGIC_PEARLS_UPGRADE_TITLE: String = "Magic Pearls"
 
     /**
      * The value for the beginning level of all the upgrades for the game
@@ -133,6 +142,11 @@ object GameVariables {
     const val LOST_TREASURE_UPGRADE_ID: Int = 7
 
     /**
+     * Upgrade ID for the Magic Pearls upgrade
+     */
+    const val MAGIC_PEARLS_UPGRADE_ID: Int = 8
+
+    /**
      * Value for how much the cash over time increments by when Investments upgrade is selected
      */
     const val INVESTMENTS_CASH_OVER_TIME_INCREMENT = 50
@@ -156,6 +170,11 @@ object GameVariables {
      * Value for how much the cash over time increments by when Lost Treasure upgrade is selected
      */
     const val LOST_TREASURE_CASH_OVER_TIME_INCREMENT = 5000000
+
+    /**
+     * Value for how much the cash over time increments by when Magic Pearls upgrade is selected
+     */
+    const val MAGIC_PEARLS_CASH_OVER_TIME_INCREMENT = 50000000
 
     /**
      * Value that undergoes Modulo operation with selected upgrade level to check that the user
@@ -215,6 +234,11 @@ object GameVariables {
     var lostTreasureUpgradeCost: Long = LOST_TREASURE_UPGRADE_START_COST
 
     /**
+     * The value for the cost of the Magic Pearls upgrade that starts at its given start cost
+     */
+    var magicPearlsUpgradeCost: Long = MAGIC_PEARLS_UPGRADE_START_COST
+
+    /**
      * The Upgrades of the game mapped to their Upgrade IDs
      */
     val GAME_UPGRADES: HashMap<Int, String> =
@@ -225,6 +249,7 @@ object GameVariables {
             GOLD_MINE_UPGRADE_ID to GOLD_MINE_UPGRADE_TITLE,
             REAL_ESTATE_UPGRADE_ID to REAL_ESTATE_UPGRADE_TITLE,
             CASH_TRIDENT_UPGRADE_ID to CASH_TRIDENT_UPGRADE_TITLE,
-            LOST_TREASURE_UPGRADE_ID to LOST_TREASURE_UPGRADE_TITLE
+            LOST_TREASURE_UPGRADE_ID to LOST_TREASURE_UPGRADE_TITLE,
+            MAGIC_PEARLS_UPGRADE_ID to MAGIC_PEARLS_UPGRADE_TITLE
         )
 }

@@ -151,8 +151,15 @@ class UpgradesAdapter(
                 if (bonusReached()) {
                     GameVariables.cashOverTimeIncrement *= 2
                 }
-                GameVariables.cashClickIncrement += GameVariables
+                GameVariables.cashOverTimeIncrement += GameVariables
                     .LOST_TREASURE_CASH_OVER_TIME_INCREMENT
+            }
+            GameVariables.MAGIC_PEARLS_UPGRADE_TITLE -> {
+                if (bonusReached()) {
+                    GameVariables.cashOverTimeIncrement *= 2
+                }
+                GameVariables.cashOverTimeIncrement += GameVariables
+                    .MAGIC_PEARLS_CASH_OVER_TIME_INCREMENT
             }
         }
     }
