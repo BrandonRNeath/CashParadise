@@ -77,7 +77,6 @@ class UpgradesAdapter(
         checkUpgradeCostFormat(viewHolder)
     }
 
-
     /**
      * The benefits of the upgrade selected by the user is added and the upgrade level is
      * increased
@@ -107,59 +106,87 @@ class UpgradesAdapter(
          * Upgrade cash benefits are given determined off what upgrade has been selected
          */
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
+            /**
+             * When Luck upgrade is selected the players cash click increment is increased by 1
+             */
             GameVariables.LUCK_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashClickIncrement *= 2
-                }
                 GameVariables.cashClickIncrement++
             }
+
+            /**
+             * When Money Trees upgrade is selected the players cash over time is increased by 1
+             */
             GameVariables.MONEY_TREES_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement++
             }
+
+            /**
+             * When Investments upgrade is selected the players cash over time is increased by
+             * its set constant value
+             */
             GameVariables.INVESTMENTS_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .INVESTMENTS_CASH_OVER_TIME_INCREMENT
             }
+
+            /**
+             * When Gold Mine upgrade is selected the players cash over time is increased by
+             * its set constant value
+             */
             GameVariables.GOLD_MINE_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .GOLD_MINE_CASH_OVER_TIME_INCREMENT
             }
+
+            /**
+             * When Real Estate upgrade is selected the players cash over time is increased by
+             * its set constant value
+             */
             GameVariables.REAL_ESTATE_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .REAL_ESTATE_CASH_OVER_TIME_INCREMENT
             }
+
+            /**
+             * When Cash Trident upgrade is selected the players cash click increment is increased
+             * by its set constant value
+             */
             GameVariables.CASH_TRIDENT_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashClickIncrement *= 2
-                }
                 GameVariables.cashClickIncrement += GameVariables
                     .CASH_TRIDENT_CASH_CLICK_INCREMENT
             }
+
+            /**
+             * When Lost Treasure upgrade is selected the players cash over time is increased by
+             * its set constant value
+             */
             GameVariables.LOST_TREASURE_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .LOST_TREASURE_CASH_OVER_TIME_INCREMENT
             }
+
+            /**
+             * When Magic Pearls upgrade is selected the players cash over time is increased by
+             * its set constant value
+             */
             GameVariables.MAGIC_PEARLS_UPGRADE_TITLE -> {
-                if (bonusReached()) {
-                    GameVariables.cashOverTimeIncrement *= 2
-                }
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .MAGIC_PEARLS_CASH_OVER_TIME_INCREMENT
+            }
+        }
+
+        /**
+         *  Checks if upgrade bonus has been reached and if upgrade was cash click upgrade then
+         *  cash click increment is doubled else if upgrade was cash over time upgrade then
+         *  cash over time upgrade is doubled
+         */
+        if (bonusReached()) {
+            if (GameVariables.GAME_UPGRADES[upgradeId] == GameVariables.LUCK_UPGRADE_TITLE ||
+                GameVariables.GAME_UPGRADES[upgradeId] == GameVariables.CASH_TRIDENT_UPGRADE_TITLE
+            ) {
+                GameVariables.cashClickIncrement *= 2
+            } else {
+                GameVariables.cashOverTimeIncrement *= 2
             }
         }
     }
