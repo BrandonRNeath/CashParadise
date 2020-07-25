@@ -29,7 +29,6 @@ object GameVariables {
      */
     private const val REAL_ESTATE_UPGRADE_START_COST: Int = 10000000
 
-
     /**
      * The value for the cost of the Cash Trident upgrade at the start of the game
      */

@@ -10,9 +10,8 @@ import com.nemesisprotocol.cashparadise.adapter.UpgradesAdapter
 import com.nemesisprotocol.cashparadise.gamedata.GameVariables
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_main.*
-
 import humanize.ICUHumanize.compactDecimal
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
      */
     private val updateCash = object : Runnable {
         override fun run() {
-            incrementCash()
+            incrementCash(GameVariables.cashOverTimeIncrement)
             cashHandler.postDelayed(this, GameVariables.DELAY_ONE_SECOND)
         }
     }
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
          * Setup on click listener to increase cash each click of cash
          */
         cash_increase_iv.setOnClickListener {
-            incrementCash()
+            incrementCash(GameVariables.cashClickIncrement)
         }
 
         /**
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity() {
                         spanSizeLookup = upgradeAdapter.spanSizeLookup
                     }
             adapter = upgradeAdapter
-
         }
 
         /**
@@ -93,10 +91,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *  Overtime cash increment
+     *  Increments the players cash depending on increment value passed whether its cash over time
+     *  increment value or cash click increment value
      */
-    private fun incrementCash() {
-        GameVariables.cash = (GameVariables.cash + GameVariables.cashOverTimeIncrement)
+    private fun incrementCash(incrementValue: Long) {
+        GameVariables.cash = (GameVariables.cash + incrementValue)
         if (GameVariables.cash > GameVariables.ONE_MILLION_CASH_VALUE) {
             player_score_tv.text = playersTotalCash.replace(
                 playersTotalCash,
@@ -114,8 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      *  Setup fresh game
-     *  Adds all the upgrades for the game into the adapter for recycler view displaying
-     *  upgrades
+     *  Adds all the upgrades for the game into the adapter for recycler view displaying upgrades
      */
     private fun freshCashParadise() {
         upgradeAdapter.add(
