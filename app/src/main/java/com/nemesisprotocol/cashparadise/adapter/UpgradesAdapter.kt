@@ -31,10 +31,6 @@ class UpgradesAdapter(
     private var currentUpgradeLevelText = "Upgrade Level $currentUpgradeLevel"
     private var currentUpgradeCostText = "Cost: $currentUpgradeCost"
 
-    /**
-     *
-     * @return Int returns layout for recycler view
-     */
     override fun getLayout(): Int {
         return R.layout.upgrade_row
     }
@@ -46,17 +42,12 @@ class UpgradesAdapter(
      * @param position Int is the current position of the item within the recycler view
      */
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
-        /**
-         * Setting value of text views within the view
-         */
+        // Setting value of text views within the view
         viewHolder.itemView.tv_upgrade_title.text = upgradeTitle
         viewHolder.itemView.tv_current_upgrade_level.text = currentUpgradeLevelText
         viewHolder.itemView.tv_current_upgrade_cost.text = currentUpgradeCostText
 
-        /**
-         * Setting image view of the upgrade item within the recycler view
-         */
+        // Setting image view of the upgrade item within the recycler view
         viewHolder.itemView.iv_upgrade.setImageDrawable(
             ContextCompat.getDrawable(
                 viewHolder.itemView.context,
@@ -64,16 +55,12 @@ class UpgradesAdapter(
             )
         )
 
-        /**
-         * On click listener for buying upgrade
-         */
+        // On click listener for buying upgrade
         viewHolder.itemView.upgrade_card.setOnClickListener {
             if (GameVariables.cash >= currentUpgradeCost) {
                 upgradeSelectedItem(viewHolder)
 
-                /**
-                 * Animation occurs when upgrade has been bought
-                 */
+                // Animation occurs when upgrade has been bought
                 val upgradeClickAnimation: Animation =
                     AnimationUtils.loadAnimation(
                         viewHolder.itemView.context,
@@ -83,9 +70,7 @@ class UpgradesAdapter(
             }
         }
 
-        /**
-         * Displaying cost of upgrade
-         */
+        // Displaying cost of upgrade
         checkUpgradeCostFormat(viewHolder)
     }
 
@@ -103,95 +88,55 @@ class UpgradesAdapter(
             true
         )
 
-        /**
-         *  Deduct user cash
-         */
+        // Users cash is deducted
         GameVariables.cash -= currentUpgradeCost
         currentUpgradeCost += (currentUpgradeCost * GameVariables.UPGRADE_COST_MODIFIER).toLong()
 
-        /**
-         *  Replacing current upgrade cost text view with new upgrade cost
-         */
+        // Replacing current upgrade cost text view with new upgrade cost
         checkUpgradeCostFormat(viewHolder)
 
-        /**
-         * Upgrade cash benefits are given determined off what upgrade has been selected
-         */
+        // Upgrade cash benefits are given determined off what upgrade has been selected
         when (GameVariables.GAME_UPGRADES[upgradeId]) {
-            /**
-             * When Luck upgrade is selected the players cash click increment is increased by 1
-             */
             GameVariables.LUCK_UPGRADE_TITLE -> {
                 GameVariables.cashClickIncrement++
             }
 
-            /**
-             * When Money Trees upgrade is selected the players cash over time is increased by 1
-             */
             GameVariables.MONEY_TREES_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement++
             }
 
-            /**
-             * When Investments upgrade is selected the players cash over time is increased by
-             * its set constant value
-             */
             GameVariables.INVESTMENTS_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .INVESTMENTS_CASH_OVER_TIME_INCREMENT
             }
 
-            /**
-             * When Gold Mine upgrade is selected the players cash over time is increased by
-             * its set constant value
-             */
             GameVariables.GOLD_MINE_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .GOLD_MINE_CASH_OVER_TIME_INCREMENT
             }
 
-            /**
-             * When Real Estate upgrade is selected the players cash over time is increased by
-             * its set constant value
-             */
             GameVariables.REAL_ESTATE_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .REAL_ESTATE_CASH_OVER_TIME_INCREMENT
             }
 
-            /**
-             * When Cash Trident upgrade is selected the players cash click increment is increased
-             * by its set constant value
-             */
             GameVariables.CASH_TRIDENT_UPGRADE_TITLE -> {
                 GameVariables.cashClickIncrement += GameVariables
                     .CASH_TRIDENT_CASH_CLICK_INCREMENT
             }
 
-            /**
-             * When Lost Treasure upgrade is selected the players cash over time is increased by
-             * its set constant value
-             */
             GameVariables.LOST_TREASURE_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .LOST_TREASURE_CASH_OVER_TIME_INCREMENT
             }
 
-            /**
-             * When Magic Pearls upgrade is selected the players cash over time is increased by
-             * its set constant value
-             */
             GameVariables.MAGIC_PEARLS_UPGRADE_TITLE -> {
                 GameVariables.cashOverTimeIncrement += GameVariables
                     .MAGIC_PEARLS_CASH_OVER_TIME_INCREMENT
             }
         }
 
-        /**
-         *  Checks if upgrade bonus has been reached and if upgrade was cash click upgrade then
-         *  cash click increment is doubled else if upgrade was cash over time upgrade then
-         *  cash over time upgrade is doubled
-         */
+        // Bonuses given if user has reached bonus level
         if (bonusReached()) {
             if (GameVariables.GAME_UPGRADES[upgradeId] == GameVariables.LUCK_UPGRADE_TITLE ||
                 GameVariables.GAME_UPGRADES[upgradeId] == GameVariables.CASH_TRIDENT_UPGRADE_TITLE
@@ -235,11 +180,5 @@ class UpgradesAdapter(
         }
     }
 
-    /**
-     *
-     * @param spanCount Int
-     * @param position Int
-     * @return Int returns half the span count
-     */
     override fun getSpanSize(spanCount: Int, position: Int) = spanCount / 2
 }
