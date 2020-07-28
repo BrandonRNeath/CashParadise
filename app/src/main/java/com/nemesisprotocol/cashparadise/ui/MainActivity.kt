@@ -21,19 +21,8 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
-    /**
-     * Players current cash amount
-     */
     private var playersTotalCash = "Total Cash: ${GameVariables.cash}"
-
-    /**
-     * This is the group adapter for the recycler view containing the cash upgrades
-     */
     private lateinit var upgradeAdapter: GroupAdapter<GroupieViewHolder>
-
-    /**
-     * Handler for delaying runnable object every 1 second
-     */
     lateinit var cashHandler: Handler
 
     /**
@@ -49,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setupUI()
     }
 
@@ -59,31 +49,23 @@ class MainActivity : AppCompatActivity() {
 
         cashHandler = Handler(Looper.getMainLooper())
 
-        /**
-         * Setup on click listener to increase cash each click of cash
-         */
+        // Setup on click listener to increase cash each click of cash
         cash_increase_iv.setOnClickListener {
             incrementCash(GameVariables.cashClickIncrement)
 
-            /**
-             * Animation each time the player clicks the cash
-             */
+            // Animation each time the player clicks the cash
             val cashClickAnimation: Animation =
                 AnimationUtils.loadAnimation(this, R.anim.scale_animation)
             cash_increase_iv.startAnimation(cashClickAnimation)
         }
 
-        /**
-         * Setting adapter for recycler view for cash upgrades
-         */
+        // Setting adapter for recycler view for cash upgrades
         upgradeAdapter = GroupAdapter<GroupieViewHolder>().apply {
             spanCount = 2
         }
 
-        /**
-         * Adding layout manager for the view as a Grid layout manager. With the addition
-         * of checking span size of the items within each row of the recycler view
-         */
+        // Adding layout manager for the view as a Grid layout manager. With the addition
+        // of checking span size of the items within each row of the recycler view
         upgrade_recyclerview.apply {
             layoutManager =
                 GridLayoutManager(this@MainActivity, upgradeAdapter.spanCount)
@@ -93,15 +75,15 @@ class MainActivity : AppCompatActivity() {
             adapter = upgradeAdapter
         }
 
-        /**
-         *  Begin Cash Paradise game
-         */
+        // Begin Cash Paradise game
         freshCashParadise()
     }
 
     /**
-     *  Increments the players cash depending on increment value passed whether its cash over time
-     *  increment value or cash click increment value
+     *
+     * Increments the players cash depending on increment value passed whether its cash over time
+     * increment value or cash click increment value
+     * @param incrementValue Long
      */
     private fun incrementCash(incrementValue: Long) {
         GameVariables.cash = (GameVariables.cash + incrementValue)
@@ -121,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *  Setup fresh game
+     *  Sets up fresh game
      *  Adds all the upgrades for the game into the adapter for recycler view displaying upgrades
      */
     private fun freshCashParadise() {
