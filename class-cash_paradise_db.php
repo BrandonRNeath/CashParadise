@@ -26,7 +26,7 @@ class CashParadiseDB
      */
     function register_user($username, $password)
     {
-        if (self::check_user_exists($username, self::$connection) == true) {
+        if (self::check_user_exists($username) == true) {
             echo "User already exists";
         } else {
             echo "User can be added";
@@ -43,6 +43,28 @@ class CashParadiseDB
             } else {
                 echo "Error has occured " . $mysqli_query . "<br>" . self::$connection->error;
             }
+        }
+    }
+
+    /**
+     * @param $username username of the user to register into the database
+     * @param $password password of the user to register into the database 
+     */
+    function login_user($username, $password)
+    {
+        if (self::check_user_exists($username)) {
+            $mysqli_query = "SELECT users.username, users.password FROM users WHERE username LIKE '$username';";
+            $result = mysqli_query(self::$connection, $mysqli_query);
+            $fetchedRow = mysqli_fetch_assoc($result);
+
+            // Verifies password fetched and password entered by the user
+            if (password_verify($password, $fetchedRow["password"])) {
+                echo "Welcome" . $fetchedRow["username"];
+            } else {
+                echo "Incorrect password";
+            }
+        } else {
+            echo "User does not exist";
         }
     }
 
